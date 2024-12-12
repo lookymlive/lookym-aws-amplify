@@ -17,8 +17,8 @@ const client = generateClient<Schema>();
 
 export default function App() {
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
-  
-  
+
+
   function listTodos() {
     client.models.Todo.observeQuery().subscribe({
       next: (data) => setTodos([...data.items]),
@@ -42,25 +42,26 @@ export default function App() {
   return (
     <Authenticator>
       {({ signOut, user }) => (
-    <main>
-      <h1>Lookym</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}
-          onClick={() => deleteTodo(todo.id)}
-          >{todo.content}</li>
-        ))}
-      </ul>
-            <button onClick={signOut}>Sign out</button>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
-          Review next steps of this tutorial.
-        </a>
-      </div>
-    </main>
+        <main>
+          <h1>Lookym</h1>
+          <button onClick={createTodo}>+ new</button>
+          <ul>
+            {todos.map((todo) => (
+              <li key={todo.id}
+                onClick={() => deleteTodo(todo.id)}
+              >{todo.content}
+              </li>
+            ))}
+          </ul>
+          <button onClick={signOut}>Sign out</button>
+          <div>
+            🥳 App successfully hosted. Try creating a new todo.
+            <br />
+            <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
+              Review next steps of this tutorial.
+            </a>
+          </div>
+        </main>
       )}
     </Authenticator>
   );
